@@ -2,7 +2,7 @@ package com.xworkz.Banks;
 
 import com.xworkz.RbiBank.RbiBank;
 
-public class SbiBank  extends RbiBank {
+public abstract class SbiBank  extends RbiBank {
 
 
     @Override
@@ -129,4 +129,6 @@ public class SbiBank  extends RbiBank {
     public String AuditTrailArchiver() {
         return " AuditTrailArchiver for Sbi Bank";
     }
+
+    public abstract void insert();
 }

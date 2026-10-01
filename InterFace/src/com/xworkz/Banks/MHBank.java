@@ -1,6 +1,6 @@
 package com.xworkz.Banks;
 
-public class MHBank extends  SbiBank{
+public class MHBank extends SbiBank{
 
     @Override
     public  String AadhaarBiometricAuthenticatable(){
@@ -116,5 +116,10 @@ public class MHBank extends  SbiBank{
     @Override
     public String AuditTrailArchiver() {
         return "AuditTrailArchiver for MHBank";
+    }
+
+    @Override
+    public void insert() {
+        System.out.println("hi");
     }
 }

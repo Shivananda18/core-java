@@ -63,8 +63,7 @@ public class BankRunner {
         karnatakaGrameenaBank.ConsentRecordKeeper();
         karnatakaGrameenaBank.AuditTrailArchiver();
 
-
-        RbiBank sbiBank=new SbiBank();
+        RbiBank sbiBank=new MHBank();
         System.out.println(sbiBank.AadhaarBiometricAuthenticatable());
         sbiBank.AadhaarOtpVerifiable();
         sbiBank.OfflineAadhaarXmlValidator();
@@ -90,7 +89,6 @@ public class BankRunner {
         sbiBank.FraudAlertDisseminator();
         sbiBank.ConsentRecordKeeper();
         sbiBank.AuditTrailArchiver();
-
 
         RbiBank bankOfBaroda=new BankOfBaroda();
         System.out.println(bankOfBaroda.AadhaarBiometricAuthenticatable());
