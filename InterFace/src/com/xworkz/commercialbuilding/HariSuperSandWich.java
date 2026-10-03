@@ -1,6 +1,6 @@
 package com.xworkz.commercialbuilding;
 
-public class HariSuperSandWich implements CommercialBuilding{
+public  class HariSuperSandWich implements CommercialBuilding{
 
     @Override
     public double doBusiness(){
