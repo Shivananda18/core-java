@@ -1,7 +1,13 @@
 package com.xworkz.notificationservice.notification;
 
-public interface Notification {
+public abstract class  Notification {
 
-    void sendNotification();
-    void receiveNotification();
+  //4 var instance variables
+  int i;
+
+  protected Notification(int i){
+    this.i=i;
+  }
+    public abstract   void sendNotification();
+  public abstract   void receiveNotification();
 }

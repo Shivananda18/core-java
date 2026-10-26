@@ -40,9 +40,6 @@ public class PlatForm {
     }
 
     public String toString(){
-        return "Platform ={platformId : "+platFormId+"platFormNumber : "+platformNumber+"RoutNumber : "+routNumber+"Rout : "+rout
-
-
-        '}';
+        return "Platform ={platformId : "+platFormId+"platFormNumber : "+platformNumber+"RoutNumber : "+routNumber+"Rout : "+rout+'}';
     }
 }

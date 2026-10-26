@@ -2,13 +2,13 @@ package com.xworkz.fortisapp.fortis;
 
 import com.xworkz.fortisapp.doctor.Doctor;
 
-public class Hospital {
-
+public class Hospital  {
 
    private Doctor[] doctors=new Doctor[5];
    int index;
 
-    public boolean  addDoctors(Doctor doctors) {
+
+   public boolean  addDoctors(Doctor doctors) {
           boolean isAdded = false;
 
           boolean isIdValid = false;
@@ -46,7 +46,7 @@ public class Hospital {
            if(experience!=null && !experience.isEmpty()){
                isexpirienceValid=true;
            }else{
-               System.out.println("expirience is invlaid ");
+               System.out.println("experience is invalid ");
            }
           int fees= doctors.getFees();
            if(fees>0 ){
@@ -64,12 +64,11 @@ public class Hospital {
            }
         return isAdded;
     }
-    public boolean getAllDoctors() {
+
+    public void getAllDoctors() {
         for (Doctor doctors1 : doctors) {
             System.out.println(doctors1);
         }
-
-        return false;
     }
 
 }

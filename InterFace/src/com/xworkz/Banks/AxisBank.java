@@ -4,6 +4,10 @@ import com.xworkz.RbiBank.RbiBank;
 
 public class AxisBank extends RbiBank {
 
+     private  void mobileBanking(){
+
+      }
+
     @Override
     public  String AadhaarBiometricAuthenticatable(){
         return "AadhaarBiometricAuthenticatable for AxisBank ";

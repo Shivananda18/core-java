@@ -10,11 +10,11 @@ public class NotificationRunner {
     public static void main(String[] args) {
 
 
-        Notification notification=new SMSNotification();
+        Notification notification=new SMSNotification(10);
         notification.sendNotification();
         notification.receiveNotification();
 
-        Notification notification1=new WhatsAppNotification();
+        Notification notification1=new WhatsAppNotification(100);
         notification1.sendNotification();
         notification1.receiveNotification();
 

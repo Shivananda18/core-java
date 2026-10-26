@@ -132,4 +132,81 @@ for (Order order1:order){
        }
         return warranty;
     }
+
+    @Override
+    public boolean updateOrderNameByOrderId(String newName, int id) {
+        boolean updatename=false;
+        for(Order order1:order){
+            if(id==order1.getOrderId()){
+                order1.setOrderName(newName);
+                updatename=true;
+                System.out.println("name is updated");
+            }
+        }
+        return updatename;
+    }
+
+    @Override
+    public boolean updateOrderIdByOrderName(int newId, String name) {
+        boolean updateId=false;
+        for(Order order1:order){
+            if(name.equals(order1.getOrderName())){
+                order1.setOrderId(newId);
+                updateId=true;
+                System.out.println("id is updated");
+            }
+        }
+        return updateId;
+    }
+
+    @Override
+    public boolean updateOrderPriceByOrderDiscount(double newPrice, double discount) {
+        boolean updatePrice=false;
+        for(Order order1:order){
+            if(discount==order1.getDiscount()){
+                order1.setOrderPrice(newPrice);
+                updatePrice=true;
+                System.out.println("price updated");
+            }
+        }
+        return updatePrice;
+    }
+
+    @Override
+    public boolean updateOrderPromiseFeesBYOrderWarranty(double newProtectPromiseFees, String warranty) {
+        boolean updateFees=false;
+        for(Order order1:order){
+            if(warranty.equals(order1.getWarranty())){
+                order1.setPotectPromiseFees(newProtectPromiseFees);
+                updateFees=true;
+                System.out.println("Protect Promise Fees is updated");
+            }
+        }
+        return updateFees;
+    }
+
+    @Override
+    public boolean updateOrderPriceByOrderCoupon(double newPrice, double coupon) {
+        boolean updatePrice=false;
+        for(Order order1:order){
+            if(coupon==order1.getCouponsForYou()){
+                order1.setOrderPrice(newPrice);
+                updatePrice=true;
+            }
+        }
+        return updatePrice;
+    }
+
+    @Override
+    public boolean updateOrderWarrantyBYOrderPrice(String newWarranty, double price) {
+        boolean updateWarranty=false;
+        for(Order order1:order){
+            if(price==order1.getOrderPrice()){
+                order1.setWarranty(newWarranty);
+                updateWarranty=true;
+                System.out.println("warranty is updated");
+            }
+        }
+        return updateWarranty;
+    }
 }

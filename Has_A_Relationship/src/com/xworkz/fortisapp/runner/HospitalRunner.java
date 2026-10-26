@@ -7,14 +7,17 @@ public class HospitalRunner {
 
     public static void main(String[] args) {
 
+        Hospital hospitalRule =new Hospital();
+
         String[] specialization = {"Diabetology/Endocrinology", " Endocrinology"};
         String[] specialization1 = {"General Surgery", "Bariatric Surgery ", "Robotic Surgery ", "General Surgery", " General and Minimal Access Surgery", "General and Laparoscopic Surgery", " Oncology "};
         String[] specialization2 = {"Cardiac Sciences", "Interventional Cardiology"};
-        String[] specialization3 = {"Support Specialties ", "General Physician", "Internal Medicine ", "Internal Medicine"};
+        String[] specialization3 = {"Support Spec" +"ialties ", "General Physician", "Internal Medicine ", "Internal Medicine"};
         String[] specialization4 = {};
 
         Hospital hospital = new Hospital();
         Doctor doctor = new Doctor();
+
         doctor.setDoctorId(1);
         doctor.setDoctorName("Anoop Mishra");
         doctor.setDesignation("Executive Chairman Fortis C Doc | Fortis C-Doc");

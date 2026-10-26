@@ -11,5 +11,11 @@ public interface Cart {
     double getPotectPromiseFeesByOrderWarranty(String orderWarranty);
     double getOrderPriceByOrderCoupon(double OrderCoupon);
     String getWarrantyByOrderPrice(double orderPrice);
+    boolean updateOrderNameByOrderId(String newName,int id);
+    boolean updateOrderIdByOrderName(int newId,String name);
+    boolean updateOrderPriceByOrderDiscount(double newPrice,double discount);
+    boolean updateOrderPromiseFeesBYOrderWarranty(double newProtectPromiseFees,String warranty);
+    boolean updateOrderPriceByOrderCoupon(double newPrice,double coupon);
+    boolean updateOrderWarrantyBYOrderPrice(String newWarranty,double price);
 
 }
