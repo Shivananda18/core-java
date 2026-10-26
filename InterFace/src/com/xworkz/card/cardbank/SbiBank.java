@@ -10,5 +10,4 @@ public class SbiBank extends AxisBank{
     public void helpPeople(){
         System.out.println("SbiBank Card inserted");
     }
-
 }

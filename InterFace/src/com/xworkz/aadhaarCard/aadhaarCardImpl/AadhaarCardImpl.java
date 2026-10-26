@@ -124,4 +124,54 @@ public class AadhaarCardImpl implements AadhaarCard {
       }
         return getAddress;
     }
+
+    @Override
+    public boolean updateIdByName(int newId, String name) {
+      boolean updateId=false;
+      for(AadhaarUser aadhaarUser:aadhaarUsers){
+          if(name.equals(aadhaarUser.getName())){
+              aadhaarUser.setId(newId);
+              updateId=true;
+          }
+      }
+        return updateId;
+    }
+
+    @Override
+    public boolean updateAadhaarNumberByMobileNumber(long newAadhaarNumber, long mobileNumber) {
+      boolean updateAadhaarNumber=false;
+      for(AadhaarUser aadhaarUser:aadhaarUsers){
+          if(mobileNumber==aadhaarUser.getMobileNumber()){
+              aadhaarUser.setAadhaarNumber(newAadhaarNumber);
+              updateAadhaarNumber=true;
+          }
+      }
+        return updateAadhaarNumber;
+    }
+
+    @Override
+    public boolean updateGenderByname(String newGender, String name) {
+      boolean updateGender=false;
+      for(AadhaarUser aadhaarUser:aadhaarUsers){
+          if(name.equals(aadhaarUser.getName())){
+              aadhaarUser.setGender(newGender);
+              updateGender=true;
+              System.out.println("gender is updated");
+          }
+      }
+        return updateGender;
+    }
+
+    @Override
+    public boolean updateEmailByAddress(String newEmail, String address) {
+      boolean updateEmail=false;
+      for(AadhaarUser aadhaarUser:aadhaarUsers){
+          if(aadhaarUser.equals(aadhaarUser.getAddress())){
+              aadhaarUser.setEmail(newEmail);
+              updateEmail=true;
+              System.out.println("email is updated");
+          }
+      }
+        return updateEmail;
+    }
 }

@@ -44,7 +44,7 @@ public class AmazonProductImpl implements AmazonProduct {
        if(product.getRam()!=null && !product.getRam().isEmpty()){
            isRamAdded=true;
        }
-       if(product.getSpecialFeature()!=null){
+       if(product.getSpecialFeature()!=null ){
            isSpecialFeature=true;
        }
        if(isProductIdAdded && isColourAdded && isSpecialFeature && isBrandNameAdded && isModelAdded && isScreenSize && isHardDiskAdded && isRamAdded){
@@ -108,5 +108,44 @@ public class AmazonProductImpl implements AmazonProduct {
             }
         }
         return  getProductFeature;
+    }
+
+    @Override
+    public boolean updateIdByName(int newId, String name) {
+        boolean updateId=false;
+        for(Product product:products){
+            if(name.equals(product.getBrandName())){
+                product.setProductId(newId);
+                updateId=true;
+                System.out.println("id is updated");
+            }
+        }
+        return updateId;
+    }
+
+    @Override
+    public boolean updateModelByRam(String newModel, String ram) {
+        boolean updateModel=false;
+        for(Product product:products){
+            if(ram.equals(product.getRam())){
+                product.setModel(newModel);
+                updateModel=true;
+                System.out.println("model is updated");
+            }
+        }
+        return updateModel;
+    }
+
+    @Override
+    public boolean updateFeaturByColour(String[] newFeature, String colour) {
+        boolean updateFeature=false;
+        for(Product product:products){
+            if(colour.equals(product.getColour())){
+                product.setSpecialFeature(newFeature);
+                updateFeature=true;
+                System.out.println("product feature is updated");
+            }
+        }
+        return updateFeature;
     }
 }

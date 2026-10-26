@@ -126,6 +126,58 @@ public class PoliceStationImpl implements PoliceStation {
         }
         return getOfficerName;
     }
+
+    @Override
+    public boolean updateOfficerNameById(String newName, int id) {
+        boolean updateName=false;
+        for(PoliceOfficer policeOfficer1:policeOfficer){
+            if(id==policeOfficer1.getPoliceId()){
+                policeOfficer1.setOfficerName(newName);
+                updateName=true;
+                System.out.println("name is updated");
+            }
+        }
+        return updateName;
+    }
+
+    @Override
+    public boolean updateDepartmentByName(String newDepartment, String name) {
+        boolean updateDepartment=false;
+        for(PoliceOfficer policeOfficer1:policeOfficer){
+            if(name.equals(policeOfficer1.getOfficerName())){
+                policeOfficer1.setDepartment(newDepartment);
+                updateDepartment=true;
+                System.out.println("Department is updated");
+            }
+        }
+        return updateDepartment;
+    }
+
+    @Override
+    public boolean updateBadgeNumberByRank(String newBadgeNumber, int rank) {
+        boolean updateBadgeNumber=false;
+        for(PoliceOfficer policeOfficer1:policeOfficer){
+            if(rank==policeOfficer1.getRank()){
+                policeOfficer1.setBadgeNumber(newBadgeNumber);
+                updateBadgeNumber=true;
+                System.out.println("badge number is updated");
+            }
+        }
+        return updateBadgeNumber;
+    }
+
+    @Override
+    public boolean updateonDutyBYAge(boolean newOnduty, int age) {
+        boolean updateOnDuty=false;
+        for(PoliceOfficer policeOfficer1:policeOfficer){
+            if(age==policeOfficer1.getpoliceOfficerAge()){
+                policeOfficer1.setOnDuty(newOnduty);
+                updateOnDuty=true;
+                System.out.println("OnDuty is updated");
+            }
+        }
+        return updateOnDuty;
+    }
 }
 
 

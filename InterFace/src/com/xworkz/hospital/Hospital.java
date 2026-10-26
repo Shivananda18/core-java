@@ -13,4 +13,12 @@ public interface Hospital {
   int getDoctorIdByDoctorName(String doctorName);
   String [] getSpecializationByDesignation(String DoctorDesignation);
   String getDoctorExperienceByDoctorDesignation(String doctorDesignation);
+
+
+  boolean updateDoctorFessByDoctorName(int newFees, String doctorName);
+  boolean updateDoctorExperienceByDoctorId(String newExperience,int doctorId);
+  boolean updateDoctorDesignationByDoctorName(String newDesignation,String name);
+  boolean updateDoctorNameBYDoctorId(String newName,int id);
+  boolean updateDoctorSpecializationByDoctorExperience(String[] newDesignation,String experience);
+  boolean updateDoctorIdByDoctorName(int newId, String name);
 }

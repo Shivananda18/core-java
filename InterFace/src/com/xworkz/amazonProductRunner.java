@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class amazonProductRunner {
 
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("enter the no of Products");
-        int size=scanner.nextInt();
+        int size = scanner.nextInt();
 
-        AmazonProduct amazonProductImpl=new AmazonProductImpl(size);
+        AmazonProduct amazonProductImpl = new AmazonProductImpl(size);
 
-        for(int i=0;i<size;i++) {
+        for (int i = 0; i < size; i++) {
             Product product = new Product();
             System.out.println("enter the product id ");
             product.setProductId(scanner.nextInt());
@@ -43,22 +43,70 @@ public class amazonProductRunner {
 
             amazonProductImpl.addProduct(product);
         }
-        amazonProductImpl.getAllProducts();
+        String yesOrNo = null;
+        do {
+            System.out.println("enter option");
+            int option = scanner.nextInt();
 
-        System.out.println("getProductIdByBrandName");
-        amazonProductImpl.getProductIdByBrandName("laptop");
+            System.out.println("press 1 getAllProducts");
+            System.out.println("press 2 getProductIdByBrandName");
+            System.out.println("press 3 getProductModelByProductScreenSize ");
+            System.out.println("press 4 gethardDiskInGbBySpecialFeature ");
+            System.out.println("press 5 getProductColorByProductRam ");
+            System.out.println("press 6 getProductFeatureByProductColour ");
 
-        System.out.println("getProductModelByProductScreenSize");
-        amazonProductImpl.getProductModelByProductScreenSize("");
+            switch (option) {
 
-        System.out.println("getHardDiskInGbBySpecialFeature");
-        amazonProductImpl.gethardDiskInGbBySpecialFeature("".split(","));
+                case 1:
+                    System.out.println("all products details are :");
+                    amazonProductImpl.getAllProducts();
+                    break;
 
-        System.out.println("getProductColorByProductRam");
-        amazonProductImpl.getProductColorByProductRam("");
+                case 2:
+                    System.out.println("getProductIdByBrandName");
+                    amazonProductImpl.getProductIdByBrandName("laptop");
+                    break;
 
-        System.out.println("getProductFeatureByProductColour");
-        amazonProductImpl.getProductFeatureByProductColour("White");
+                case 3:
+                    System.out.println("getProductModelByProductScreenSize");
+                    amazonProductImpl.getProductModelByProductScreenSize("");
+                    break;
 
+                case 4:
+                    System.out.println("getHardDiskInGbBySpecialFeature");
+                    amazonProductImpl.gethardDiskInGbBySpecialFeature("".split(","));
+                    break;
+
+                case 5:
+                    System.out.println("getProductColorByProductRam");
+                    amazonProductImpl.getProductColorByProductRam("");
+                    break;
+
+                case 6:
+                    System.out.println("getProductFeatureByProductColour");
+                    amazonProductImpl.getProductFeatureByProductColour("White");
+                    break;
+
+                case 7:
+                    System.out.println("updateIdByName");
+                    amazonProductImpl.updateIdByName(101,"mobile");
+                    break;
+
+                case 8:
+                    System.out.println("updateModelByRam");
+                    amazonProductImpl.updateModelByRam("t3x","18Gb");
+                    break;
+
+                case 9:
+                    System.out.println("update Feature Based on Colour");
+                    amazonProductImpl.updateFeaturByColour("sfv,wsf".split(","),"red");
+                    break;
+
+                default:
+                    System.out.println("please enter valid option--");
+            }
+            System.out.println("do you want continue Y/N");
+            yesOrNo = scanner.next();
+        } while (yesOrNo.equalsIgnoreCase("y"));
     }
 }

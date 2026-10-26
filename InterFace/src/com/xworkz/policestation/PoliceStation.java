@@ -12,4 +12,9 @@ public interface PoliceStation {
      boolean getPoliceOfficerOnDutyByPoliceOfficerAge(int policeOfficerAge);
      int getPoliceOfficerRankBypoliceOfficerId(int policeOfficerId);
      String getPoliceOfficerNameByPoliceOfficerRank(int rank);
+     boolean updateOfficerNameById(String newName,int id);
+     boolean updateDepartmentByName(String newDepartment,String name);
+     boolean updateBadgeNumberByRank(String newBadgeNumber,int rank);
+     boolean updateonDutyBYAge(boolean newOnduty,int age);
+
 }

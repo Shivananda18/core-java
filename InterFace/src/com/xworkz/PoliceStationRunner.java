@@ -45,25 +45,86 @@ public class PoliceStationRunner {
                 System.out.println("police officers not adding");
             }
         }
-        policeStationImpl.getPoliceOfficer();
+        String yesOrNo=null;
+        do{
+            System.out.println("press  1 getPoliceOfficer ");
+            System.out.println("press 2 getPoliceOfficerNameByPoliceOfficerId ");
+            System.out.println("press 3 getPoliceOfficerDepartmentByPoliceOfficerName ");
+            System.out.println("press 4 getPoliceOfficerBadgeNumberByPoliceOfficerRank ");
+            System.out.println("press 5 getPoliceOfficerOnDutyByPoliceOfficerAge ");
+            System.out.println("press 7 getPoliceOfficerRankBypoliceOfficerId ");
+            System.out.println("press 8 updateOfficerNameById");
+            System.out.println("press 9 updateDepartmentByName ");
+            System.out.println("press 10 updateBadgeNumberByRank");
+            System.out.println("press 11 updateonDutyBYAge");
 
-            System.out.println("fetching police officer name  by   id");
-            policeStationImpl.getPoliceOfficerNameByPoliceOfficerId(2);
+        System.out.println("please enter option");
+        int option=scanner.nextInt();
 
-            System.out.println("fetching police officer department  by   name ");
-            policeStationImpl.getPoliceOfficerDepartmentByPoliceOfficerName("Shiva");
+        switch(option) {
+            case 1:
+                System.out.println("all police officer details");
+                policeStationImpl.getPoliceOfficer();
+                break;
 
-            System.out.println("fetching police officer badgeNumber  by   rank ");
-            policeStationImpl.getPoliceOfficerBadgeNumberByPoliceOfficerRank(1000);
+            case 2:
+                System.out.println("fetching police officer name  by   id");
+                policeStationImpl.getPoliceOfficerNameByPoliceOfficerId(2);
+                break;
 
-            System.out.println("fetching onDuty by  police age");
-            policeStationImpl.getPoliceOfficerOnDutyByPoliceOfficerAge(25);
+            case 3:
+                System.out.println("fetching police officer department  by   name ");
+                policeStationImpl.getPoliceOfficerDepartmentByPoliceOfficerName("Shiva");
+                break;
 
-        System.out.println("fetching the police Rank by  id");
-        policeStationImpl.getPoliceOfficerRankBypoliceOfficerId(10);
+            case 4:
+                System.out.println("fetching police officer badgeNumber  by   rank ");
+                policeStationImpl.getPoliceOfficerBadgeNumberByPoliceOfficerRank(1000);
+                break;
 
-        System.out.println("fetching policeName by policeOfficerRank");
-        policeStationImpl.getPoliceOfficerNameByPoliceOfficerRank(1000);
+            case 5:
+                System.out.println("fetching onDuty by  police age");
+                policeStationImpl.getPoliceOfficerOnDutyByPoliceOfficerAge(25);
+                break;
 
+            case 6:
+                System.out.println("fetching the police Rank by  id");
+                policeStationImpl.getPoliceOfficerRankBypoliceOfficerId(10);
+                break;
+
+            case 7:
+                System.out.println("fetching policeName by policeOfficerRank");
+                policeStationImpl.getPoliceOfficerNameByPoliceOfficerRank(1000);
+
+                break;
+
+            case 8:
+                System.out.println("update OfficerName Based on Id");
+                policeStationImpl.updateOfficerNameById("kalmesh",2);
+                policeStationImpl.getPoliceOfficerNameByPoliceOfficerId(2);
+                break;
+
+            case 9:
+                System.out.println("update Department Based on Name");
+                policeStationImpl.updateDepartmentByName("civil"," dr.kiran");
+                break;
+
+            case 10:
+                System.out.println("update BadgeNumber Based on Rank");
+                policeStationImpl.updateBadgeNumberByRank("sfg54",150);
+                break;
+
+            case 11:
+                System.out.println("update onDuty Based on Age");
+                policeStationImpl.updateonDutyBYAge(true,25);
+                policeStationImpl.getPoliceOfficerOnDutyByPoliceOfficerAge(25);
+                break;
+
+            default:
+                System.out.println("please enter valid option");
         }
+        System.out.println("Do you want to continue Y/N");
+        yesOrNo=scanner.next();
+        }while (yesOrNo.equalsIgnoreCase("Y"));
+    }
     }
