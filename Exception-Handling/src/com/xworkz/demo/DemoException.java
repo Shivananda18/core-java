@@ -3,9 +3,10 @@ package com.xworkz.demo;
 import java.util.Scanner;
 
 public class DemoException {
+
     public static void main(String[] args) {
 
-        /*
+             /*
 
 //Arithmetic Exception
 
@@ -117,13 +118,9 @@ do {
 
             System.out.println("array size is full");
 
-
         }
-
 
     }
 }
-
-
 
 
