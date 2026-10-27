@@ -3,6 +3,8 @@ package com.xworkz.amazon.amazonProductImpl;
 import com.xworkz.amazon.AmazonProduct;
 import com.xworkz.amazon.amazonProductImpl.product.Product;
 
+import java.util.InputMismatchException;
+
 public class AmazonProductImpl implements AmazonProduct {
 
     Product[] products;
@@ -52,18 +54,30 @@ public class AmazonProductImpl implements AmazonProduct {
        }
         return addProducts;
     }
+
     public void getAllProducts(){
+        try{
         for (Product product:products){
-            if(product!=null) {
-            }else{
-                System.out.println("products not added");
-            }
             System.out.println(product);
+        }
+        }catch (NullPointerException e){
+            System.out.println("products are not added");
         }
     }
     @Override
     public int getProductIdByBrandName(String brandName) {
-        return 0;
+        int productId=0;
+
+        for(Product product:products){
+            try {
+                if (brandName.equals(product.getBrandName())) {
+                    product.getProductId();
+                }
+            }catch (InputMismatchException e){
+                System.out.println("input is miss match");
+            }
+        }
+        return productId;
     }
 
     @Override
