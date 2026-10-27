@@ -104,17 +104,17 @@ do {
         } while (yesOrNo.equalsIgnoreCase("y"));
 */
         System.out.println("enter arr size");
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        int arr=scanner.nextInt();
+        int arr = scanner.nextInt();
         try {
             System.out.println("enter names");
-            String[] names=scanner.next().split(",");
-            String[] names1=names;
-            for(int i=0;i<=arr;i++){
+            String[] names = scanner.next().split(",");
+            String[] names1 = names;
+            for (int i = 0; i <= arr; i++) {
                 System.out.println(names1);
             }
-        }catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
 
             System.out.println("array size is full");
 
