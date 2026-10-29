@@ -43,14 +43,19 @@ public class FortisHospitalImpl implements Hospital {
             this.doctors[index++]=doctors;
             isAdded=true;
         }
-        
+
         return isAdded;
     }
 
     @Override
     public void getDoctors() {
         for(Doctors doctors : doctors){
-            System.out.println(doctors);
+            doctors = null;
+            try{
+            System.out.println(doctors.hashCode());
+        }catch (NullPointerException e){
+                e.printStackTrace();
+            }
         }
         }
 
@@ -58,23 +63,32 @@ public class FortisHospitalImpl implements Hospital {
     public Doctors getDoctorsByID(int id) {
 
         System.out.println("invoking getDoctorsByID ");
-      Doctors doctors1=null;
-      for(Doctors doctor:doctors){
+        try {
+            Doctors doctors1 = null;
+            for (Doctors doctor : doctors) {
 
-          if(doctor.getDoctorId()    ==   id){
-                    doctors1   =  doctor;
+                if (doctor.getDoctorId() == id) {
+                    doctors1 = doctor;
                     break;
-          }else{
-              System.out.println("doctor id not matching");
-          }
-      }
-        return doctors1;
+                } else {
+                    System.out.println("doctor id not matching");
+                }
+            }
+
+
+            return doctors1;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    return  null;
     }
 
     @Override
     public String getDoctorNameBYDoctorFess(int fees) {
         System.out.println("invoking getDoctorNameBYDoctorFess ");
+
       String doctorName=null;
+      try{
       for(Doctors doctors: doctors){
           if(fees==doctors.getFees()){
                doctorName = doctors.getDoctorName();
@@ -84,14 +98,22 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
         return doctorName;
-    }
+    } catch (Exception e) {
+         e.printStackTrace();
+
+        }
+        return doctorName;
+  }
+
 
     @Override
     public int getDoctorFeesBYExperience(String doctorExperience) {
         int doctorFess = 0;
         System.out.println("invoking getDoctorFeesBYExperience ");
+        try{
         for (Doctors doctors : doctors) {
             if (doctorExperience.equals(doctors.getExperience()) ){
+                doctors=null;
                 doctorFess = doctors.getFees();
 
             } else {
@@ -99,14 +121,21 @@ public class FortisHospitalImpl implements Hospital {
             }
         }
             return doctorFess;
-        }
+        }catch(NullPointerException e){
+          e.printStackTrace();
+
+      }
+        return doctorFess;
+    }
 
     @Override
     public  String getDesignationBYDoctorName(String doctorName){
       String designation=null;
 
+      try{
       for(Doctors doctors1:doctors){
           if(doctorName.equals(doctors1.getDoctorName())){
+              doctors1=null;
               designation=doctors1.getDesignation();
               break;
           }else{
@@ -114,13 +143,18 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
       return designation;
+    }catch (NullPointerException e){
+      e.printStackTrace();
+      }
+      return designation;
     }
     @Override
     public int getDoctorIdByDoctorName(String doctorName){
       int doctorId=0;
-
+try{
       for(Doctors doctors1:doctors){
           if(doctorName.equals(doctors1.getDoctorName())){
+              doctors1=null;
               doctors1.getDoctorId();
               break;
           }else{
@@ -128,12 +162,16 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
       return doctorId;
+    }catch (NullPointerException e){
+    e.printStackTrace();
+}
+return doctorId;
     }
 
     @Override
     public String[] getSpecializationByDesignation(String DoctorDesignation) {
       String[] specialization=null;
-
+try{
       for(Doctors doctors1:doctors){
           if(DoctorDesignation.equals(doctors1.getDesignation())){
               String[] specialization1=doctors1.getSpecialization();
@@ -143,17 +181,27 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
         return specialization;
+    }catch (NullPointerException e){
+    e.printStackTrace();
+}
+return specialization;
     }
 
     @Override
     public String getDoctorExperienceByDoctorDesignation(String doctorDesignation) {
       String experience=null;
+      try{
       for(Doctors doctors1:doctors){
           if(doctorDesignation.equals(doctors1.getDesignation())){
+              doctors1=null;
              experience= doctors1.getExperience();
           }else{
               System.out.println("designation not matching");
           }
+      }
+      return experience;
+    }catch (NullPointerException e){
+      e.printStackTrace();
       }
       return experience;
     }
@@ -162,6 +210,7 @@ public class FortisHospitalImpl implements Hospital {
     public boolean updateDoctorFessByDoctorName(int newFees, String doctorName) {
        boolean isDoctorFessUpdate=false;
 
+       try{
        for(Doctors doctors1:doctors){
            if(doctorName.equals(doctors1.getDoctorName())){
                doctors1.setFees(newFees);
@@ -172,17 +221,27 @@ public class FortisHospitalImpl implements Hospital {
            }
        }
         return isDoctorFessUpdate;
+    }catch (NullPointerException e){
+       e.printStackTrace();
+       }
+       return isDoctorFessUpdate;
     }
 
     @Override
     public boolean updateDoctorExperienceByDoctorId(String newExperience, int doctorId) {
         boolean updateExperience=false;
-        for(Doctors doctors1:doctors){
-            if(doctorId==doctors1.getDoctorId()){
-                doctors1.setExperience(newExperience);
-                updateExperience=true;
-                System.out.println("update doctor Experience");
+        for(Doctors doctors1:doctors) {
+
+            try {
+                if (doctorId == doctors1.getDoctorId()) {
+                    doctors1.setExperience(newExperience);
+                    updateExperience = true;
+                    System.out.println("update doctor Experience");
+                }
+            }catch(NullPointerException e){
+                e.printStackTrace();
             }
+
         }
 
       return updateExperience;
@@ -191,18 +250,25 @@ public class FortisHospitalImpl implements Hospital {
     @Override
     public boolean updateDoctorDesignationByDoctorName(String newDesignation, String name) {
       boolean updateDesignation=false;
+      try{
       for(Doctors doctors1:doctors){
+
           if(name.equals(doctors1.getDoctorName())){
                   doctors1.setDoctorName(newDesignation);
                   updateDesignation=true;
               }
           }
         return updateDesignation;
+    }catch (NullPointerException e){
+      e.printStackTrace();
+      }
+      return updateDesignation;
     }
 
     @Override
     public boolean updateDoctorNameBYDoctorId(String newName, int id) {
       boolean updateName=false;
+      try{
       for(Doctors doctors1:doctors){
           if(id==doctors1.getDoctorId()){
               doctors1.setDoctorName(newName);
@@ -210,11 +276,16 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
         return updateName;
+    }catch (NullPointerException e){
+      e.printStackTrace();
+      }
+      return updateName;
     }
 
     @Override
     public boolean updateDoctorSpecializationByDoctorExperience(String[] newDesignation, String experience) {
       boolean updateSpecialization=false;
+      try{
       for(Doctors doctors1:doctors){
           if(experience.equals(doctors1.getExperience())){
               doctors1.setSpecialization(newDesignation);
@@ -225,11 +296,16 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
       return updateSpecialization;
+    }catch (NullPointerException e){
+      e.printStackTrace();
+      }
+      return updateSpecialization;
     }
 
     @Override
     public boolean updateDoctorIdByDoctorName(int newId, String name) {
       boolean updateDoctorId=false;
+      try{
       for(Doctors doctors1:doctors){
           if(name.equals(doctors1.getDoctorName())){
               doctors1.setDoctorId(newId);
@@ -237,6 +313,10 @@ public class FortisHospitalImpl implements Hospital {
           }
       }
         return updateDoctorId;
+    }catch (NullPointerException e){
+      e.printStackTrace();
+      }
+      return updateDoctorId;
     }
 
 }

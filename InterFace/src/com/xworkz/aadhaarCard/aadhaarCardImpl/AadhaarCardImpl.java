@@ -1,6 +1,7 @@
 package com.xworkz.aadhaarCard.aadhaarCardImpl;
 
 import com.xworkz.aadhaarCard.AadhaarCard;
+import com.xworkz.aadhaarException.*;
 
 public class AadhaarCardImpl implements AadhaarCard {
 
@@ -50,22 +51,36 @@ public class AadhaarCardImpl implements AadhaarCard {
 
     @Override
     public void getAllUser() {
+      try{
         for(AadhaarUser aadhaarUser:aadhaarUsers){
             if(aadhaarUser!=null){
                 System.out.println(aadhaarUser);
             }else{
-                System.out.println("Aadhaar user not added");
+                NoResultFoundException noResultFoundException=new NoResultFoundException("Aadhaar user not added");
+                throw noResultFoundException;
+
             }
         }
+    }catch (NoResultFoundException e){
+      e.printStackTrace();
+      }
     }
 
     @Override
     public int getUserIdByUserName(String userName) {
       int getUserId=0;
+      try{
       for(AadhaarUser aadhaarUser:aadhaarUsers){
           if(userName.equals(aadhaarUser.getName())){
               getUserId=aadhaarUser.getId();
+          }else{
+              InvalidIdException invalidIdException=new InvalidIdException("Invalid user Id");
+              throw invalidIdException;
           }
+      }
+      return getUserId;
+    }catch (InvalidIdException e){
+      e.printStackTrace();
       }
       return getUserId;
     }
@@ -73,10 +88,17 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public long getUserAadhaarNumberByUserMobileNumber(long userMobileNumber) {
       long getAadhaarNumber=0;
+      try {
       for(AadhaarUser aadhaarUser:aadhaarUsers){
           if(userMobileNumber==aadhaarUser.getMobileNumber()){
               getAadhaarNumber=aadhaarUser.getAadhaarNumber();
+          }else{
+              InvalidAadhaarNumberException aadhaarNumberException=new InvalidAadhaarNumberException("invalid Aadhaar Exception");
+              throw aadhaarNumberException;
           }
+      }
+      }catch (InvalidAadhaarNumberException e){
+          e.printStackTrace();
       }
         return getAadhaarNumber;
     }
@@ -84,10 +106,17 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public String getUserEmailBYUserAddress(String userAddress) {
       String getEmail=null;
+      try{
       for(AadhaarUser aadhaarUser:aadhaarUsers){
           if(userAddress.equals(aadhaarUser.getAddress())){
               getEmail=aadhaarUser.getEmail();
+          }else{
+              InvalidUserEmailException invalidUserEmailException=new InvalidUserEmailException("invalid user email");
+              throw  invalidUserEmailException;
           }
+      }
+      }catch (InvalidUserEmailException e){
+          e.printStackTrace();
       }
         return getEmail;
     }
@@ -95,10 +124,17 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public String getUserGenderByUserName(String userName) {
       String getGender=null;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(userName.equals(aadhaarUser.getName())){
-              getGender=aadhaarUser.getGender();
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (userName.equals(aadhaarUser.getName())) {
+                  getGender = aadhaarUser.getGender();
+              }else{
+                  InvalidUserGenderException invalidUserGenderException=new InvalidUserGenderException("Invalid Gender");
+                  throw invalidUserGenderException;
+              }
           }
+      }catch (InvalidUserGenderException e){
+          e.printStackTrace();
       }
         return getGender;
     }
@@ -106,10 +142,17 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public String getUserEmailByUserMobileNumber(long userMobileNumber) {
       String getEmail=null;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(userMobileNumber>0){
-              getEmail=aadhaarUser.getEmail();
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (userMobileNumber > 0) {
+                  getEmail = aadhaarUser.getEmail();
+              }else{
+                  InvalidEmailException invalidEmailException=new InvalidEmailException("invalid email");
+                  throw  invalidEmailException;
+              }
           }
+      }catch (InvalidEmailException e){
+          e.printStackTrace();
       }
         return getEmail;
     }
@@ -117,10 +160,17 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public String getUserAddressByUserAadhaarNumber(long userAadhaarNumber) {
       String getAddress=null;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(userAadhaarNumber>0){
-              getAddress=aadhaarUser.getAddress();
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (userAadhaarNumber > 0) {
+                  getAddress = aadhaarUser.getAddress();
+              }else{
+                  InvalidUserAddressException invalidUserAddressException=new InvalidUserAddressException("Invalid User Address ");
+                  throw invalidUserAddressException;
+              }
           }
+      }catch (InvalidUserAddressException e){
+          e.printStackTrace();
       }
         return getAddress;
     }
@@ -128,11 +178,18 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public boolean updateIdByName(int newId, String name) {
       boolean updateId=false;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(name.equals(aadhaarUser.getName())){
-              aadhaarUser.setId(newId);
-              updateId=true;
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (name.equals(aadhaarUser.getName())) {
+                  aadhaarUser.setId(newId);
+                  updateId = true;
+              }else{
+                  throw new InvalidUpdateIdException("invalid user ID updated");
+
+              }
           }
+      }catch (InvalidUpdateIdException e){
+          e.printStackTrace();
       }
         return updateId;
     }
@@ -140,11 +197,18 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public boolean updateAadhaarNumberByMobileNumber(long newAadhaarNumber, long mobileNumber) {
       boolean updateAadhaarNumber=false;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(mobileNumber==aadhaarUser.getMobileNumber()){
-              aadhaarUser.setAadhaarNumber(newAadhaarNumber);
-              updateAadhaarNumber=true;
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (mobileNumber == aadhaarUser.getMobileNumber()) {
+                  aadhaarUser.setAadhaarNumber(newAadhaarNumber);
+                  updateAadhaarNumber = true;
+              }else{
+                  InvalidAadhaarNumberException invalidAadhaarNumberException=new InvalidAadhaarNumberException("invalid AadhaarNumber Updated ");
+                  throw invalidAadhaarNumberException;
+              }
           }
+      }catch (InvalidUpdateAadhaarNumberException e){
+          e.printStackTrace();
       }
         return updateAadhaarNumber;
     }
@@ -152,12 +216,19 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public boolean updateGenderByname(String newGender, String name) {
       boolean updateGender=false;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(name.equals(aadhaarUser.getName())){
-              aadhaarUser.setGender(newGender);
-              updateGender=true;
-              System.out.println("gender is updated");
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (name.equals(aadhaarUser.getName())) {
+                  aadhaarUser.setGender(newGender);
+                  updateGender = true;
+                  System.out.println("gender is updated");
+              }else{
+                  InvalidUpdateGenderException invalidUpdateGenderException=new InvalidUpdateGenderException("gender not updated");
+                  throw invalidUpdateGenderException;
+              }
           }
+      }catch (InvalidUpdateGenderException e){
+          e.printStackTrace();
       }
         return updateGender;
     }
@@ -165,12 +236,19 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public boolean updateEmailByAddress(String newEmail, String address) {
       boolean updateEmail=false;
-      for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(aadhaarUser.equals(aadhaarUser.getAddress())){
-              aadhaarUser.setEmail(newEmail);
-              updateEmail=true;
-              System.out.println("email is updated");
+      try {
+          for (AadhaarUser aadhaarUser : aadhaarUsers) {
+              if (aadhaarUser.equals(aadhaarUser.getAddress())) {
+                  aadhaarUser.setEmail(newEmail);
+                  updateEmail = true;
+                  System.out.println("email is updated");
+              }else{
+                  InvalidUpdateEmailException invalidUpdateEmailException=new InvalidUpdateEmailException("Invalid update Email");
+                  throw invalidUpdateEmailException;
+              }
           }
+      }catch (InvalidUpdateEmailException e){
+          e.printStackTrace();
       }
         return updateEmail;
     }

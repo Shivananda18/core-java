@@ -1,6 +1,7 @@
 package com.xworkz.cart.orderimpl;
 
 import com.xworkz.cart.Cart;
+import com.xworkz.cartException.InvalidOrderException;
 
 public class OrderImpl implements Cart {
 
@@ -51,10 +52,16 @@ public class OrderImpl implements Cart {
         return isOrderAdedd;
     }
     @Override
-    public void getOrders() {
+    public void getOrders(){
+        try{
 for (Order order1:order){
     System.out.println(order1);
 }
+            InvalidOrderException  invalidOrderException=new InvalidOrderException("invalid Orders");
+throw invalidOrderException;
+    }catch (InvalidOrderException e){
+            e.printStackTrace();
+        }
     }
     @Override
     public String getOrderNameById(int orderId) {
@@ -64,7 +71,7 @@ for (Order order1:order){
            if(order1!=null && orderId==order1.getOrderId()){
                orderName=order1.getOrderName();
            }else{
-               System.out.println("order Id not match");
+
            }
        }
         return orderName ;

@@ -3,6 +3,7 @@ package com.xworkz;
 import com.xworkz.aadhaarCard.AadhaarCard;
 import com.xworkz.aadhaarCard.aadhaarCardImpl.AadhaarCardImpl;
 import com.xworkz.aadhaarCard.aadhaarCardImpl.AadhaarUser;
+import com.xworkz.hospital.fortisHospitalImpl.Doctors;
 
 import java.util.Scanner;
 
@@ -119,5 +120,8 @@ String yesOrNo=null;
             System.out.println("do you want to continue Y/N");
             yesOrNo=sc.next();
         } while (yesOrNo.equalsIgnoreCase("y"));
+
+        
+     //  Class<Doctors>doctorClass=  (Class<Doctors>)Class.forName("com.xworkz.hospital.fortisHospitalImpl.Doctors");
     }
 }
