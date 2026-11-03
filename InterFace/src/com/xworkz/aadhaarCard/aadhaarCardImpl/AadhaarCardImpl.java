@@ -2,6 +2,7 @@ package com.xworkz.aadhaarCard.aadhaarCardImpl;
 
 import com.xworkz.aadhaarCard.AadhaarCard;
 import com.xworkz.aadhaarException.*;
+import com.xworkz.dummy.Dummy;
 
 public class AadhaarCardImpl implements AadhaarCard {
 
@@ -52,16 +53,16 @@ public class AadhaarCardImpl implements AadhaarCard {
     @Override
     public void getAllUser() {
       try{
-        for(AadhaarUser aadhaarUser:aadhaarUsers){
-            if(aadhaarUser!=null){
+        for(AadhaarUser aadhaarUser:aadhaarUsers) {
+            if (aadhaarUser != null) {
                 System.out.println(aadhaarUser);
-            }else{
-                NoResultFoundException noResultFoundException=new NoResultFoundException("Aadhaar user not added");
+            }
+            if (aadhaarUser == null) {
+                DoctorsNotFoundException noResultFoundException = new DoctorsNotFoundException("Aadhaar user not added");
                 throw noResultFoundException;
-
             }
         }
-    }catch (NoResultFoundException e){
+    }catch (DoctorsNotFoundException e){
       e.printStackTrace();
       }
     }
@@ -71,15 +72,14 @@ public class AadhaarCardImpl implements AadhaarCard {
       int getUserId=0;
       try{
       for(AadhaarUser aadhaarUser:aadhaarUsers){
-          if(userName.equals(aadhaarUser.getName())){
-              getUserId=aadhaarUser.getId();
-          }else{
-              InvalidIdException invalidIdException=new InvalidIdException("Invalid user Id");
+          if(userName.equals(aadhaarUser.getName())) {
+              getUserId = aadhaarUser.getId();
+          }
+          }if(getUserId==0){
+              IdNotFoundException invalidIdException=new IdNotFoundException("Invalid user Id");
               throw invalidIdException;
           }
-      }
-      return getUserId;
-    }catch (InvalidIdException e){
+    }catch (IdNotFoundException e){
       e.printStackTrace();
       }
       return getUserId;
@@ -92,12 +92,13 @@ public class AadhaarCardImpl implements AadhaarCard {
       for(AadhaarUser aadhaarUser:aadhaarUsers){
           if(userMobileNumber==aadhaarUser.getMobileNumber()){
               getAadhaarNumber=aadhaarUser.getAadhaarNumber();
-          }else{
-              InvalidAadhaarNumberException aadhaarNumberException=new InvalidAadhaarNumberException("invalid Aadhaar Exception");
-              throw aadhaarNumberException;
           }
+          }
+      if(getAadhaarNumber==0){
+          AadhaarNumberNotFoundException aadhaarNumberNotFoundException=new AadhaarNumberNotFoundException("Aadhaar Number not found ");
+          throw aadhaarNumberNotFoundException;
       }
-      }catch (InvalidAadhaarNumberException e){
+      }catch (AadhaarNumberNotFoundException e){
           e.printStackTrace();
       }
         return getAadhaarNumber;
@@ -110,12 +111,13 @@ public class AadhaarCardImpl implements AadhaarCard {
       for(AadhaarUser aadhaarUser:aadhaarUsers){
           if(userAddress.equals(aadhaarUser.getAddress())){
               getEmail=aadhaarUser.getEmail();
-          }else{
-              InvalidUserEmailException invalidUserEmailException=new InvalidUserEmailException("invalid user email");
-              throw  invalidUserEmailException;
           }
+          }
+      if(getEmail==null){
+          UserEmailNotFoundException userEmailNotFoundException=new UserEmailNotFoundException("Email not Found");
+          throw userEmailNotFoundException;
       }
-      }catch (InvalidUserEmailException e){
+      }catch (UserEmailNotFoundException e){
           e.printStackTrace();
       }
         return getEmail;
@@ -128,12 +130,13 @@ public class AadhaarCardImpl implements AadhaarCard {
           for (AadhaarUser aadhaarUser : aadhaarUsers) {
               if (userName.equals(aadhaarUser.getName())) {
                   getGender = aadhaarUser.getGender();
-              }else{
-                  InvalidUserGenderException invalidUserGenderException=new InvalidUserGenderException("Invalid Gender");
-                  throw invalidUserGenderException;
               }
           }
-      }catch (InvalidUserGenderException e){
+              if (getGender == null) {
+                  UserGenderNotFoundException userGenderNotFoundException = new UserGenderNotFoundException("Gender not Found");
+                  throw userGenderNotFoundException;
+              }
+      }catch (UserGenderNotFoundException e){
           e.printStackTrace();
       }
         return getGender;
@@ -146,12 +149,12 @@ public class AadhaarCardImpl implements AadhaarCard {
           for (AadhaarUser aadhaarUser : aadhaarUsers) {
               if (userMobileNumber > 0) {
                   getEmail = aadhaarUser.getEmail();
-              }else{
-                  InvalidEmailException invalidEmailException=new InvalidEmailException("invalid email");
+              }
+          }if(getEmail==null){
+                  EmailNotFoundException invalidEmailException=new EmailNotFoundException("invalid email");
                   throw  invalidEmailException;
               }
-          }
-      }catch (InvalidEmailException e){
+      }catch (EmailNotFoundException e){
           e.printStackTrace();
       }
         return getEmail;
@@ -164,12 +167,12 @@ public class AadhaarCardImpl implements AadhaarCard {
           for (AadhaarUser aadhaarUser : aadhaarUsers) {
               if (userAadhaarNumber > 0) {
                   getAddress = aadhaarUser.getAddress();
-              }else{
-                  InvalidUserAddressException invalidUserAddressException=new InvalidUserAddressException("Invalid User Address ");
+              }
+          }if(getAddress==null){
+                  UserAddressNotFoundException invalidUserAddressException=new UserAddressNotFoundException("Invalid User Address ");
                   throw invalidUserAddressException;
               }
-          }
-      }catch (InvalidUserAddressException e){
+      }catch (UserAddressNotFoundException e){
           e.printStackTrace();
       }
         return getAddress;
@@ -183,12 +186,11 @@ public class AadhaarCardImpl implements AadhaarCard {
               if (name.equals(aadhaarUser.getName())) {
                   aadhaarUser.setId(newId);
                   updateId = true;
-              }else{
-                  throw new InvalidUpdateIdException("invalid user ID updated");
-
               }
-          }
-      }catch (InvalidUpdateIdException e){
+          }if(updateId==false){
+                  throw new UpdateIdNotFoundException("invalid user ID updated");
+              }
+      }catch (UpdateIdNotFoundException e){
           e.printStackTrace();
       }
         return updateId;
@@ -202,12 +204,12 @@ public class AadhaarCardImpl implements AadhaarCard {
               if (mobileNumber == aadhaarUser.getMobileNumber()) {
                   aadhaarUser.setAadhaarNumber(newAadhaarNumber);
                   updateAadhaarNumber = true;
-              }else{
-                  InvalidAadhaarNumberException invalidAadhaarNumberException=new InvalidAadhaarNumberException("invalid AadhaarNumber Updated ");
+              }
+          }if(updateAadhaarNumber==false){
+                  AadhaarNumberNotFoundException invalidAadhaarNumberException=new AadhaarNumberNotFoundException("invalid AadhaarNumber Updated ");
                   throw invalidAadhaarNumberException;
               }
-          }
-      }catch (InvalidUpdateAadhaarNumberException e){
+      }catch (UpdateAadhaarNumberNotFoundException e){
           e.printStackTrace();
       }
         return updateAadhaarNumber;
@@ -222,12 +224,12 @@ public class AadhaarCardImpl implements AadhaarCard {
                   aadhaarUser.setGender(newGender);
                   updateGender = true;
                   System.out.println("gender is updated");
-              }else{
-                  InvalidUpdateGenderException invalidUpdateGenderException=new InvalidUpdateGenderException("gender not updated");
+              }
+          }if(updateGender==false){
+                  UpdateGenderNotFoundException invalidUpdateGenderException=new UpdateGenderNotFoundException("gender not updated");
                   throw invalidUpdateGenderException;
               }
-          }
-      }catch (InvalidUpdateGenderException e){
+      }catch (UpdateGenderNotFoundException e){
           e.printStackTrace();
       }
         return updateGender;
@@ -242,12 +244,12 @@ public class AadhaarCardImpl implements AadhaarCard {
                   aadhaarUser.setEmail(newEmail);
                   updateEmail = true;
                   System.out.println("email is updated");
-              }else{
-                  InvalidUpdateEmailException invalidUpdateEmailException=new InvalidUpdateEmailException("Invalid update Email");
+              }
+          }if(updateEmail==false){
+                  UpdateEmailNotFoundException invalidUpdateEmailException=new UpdateEmailNotFoundException("Invalid update Email");
                   throw invalidUpdateEmailException;
               }
-          }
-      }catch (InvalidUpdateEmailException e){
+      }catch (UpdateEmailNotFoundException e){
           e.printStackTrace();
       }
         return updateEmail;
