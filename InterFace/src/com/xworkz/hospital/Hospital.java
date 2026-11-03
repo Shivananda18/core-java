@@ -11,7 +11,7 @@ public interface Hospital {
   int getDoctorFeesBYExperience(String doctorExperience);
   String getDesignationBYDoctorName(String doctorName);
   int getDoctorIdByDoctorName(String doctorName);
-  String [] getSpecializationByDesignation(String DoctorDesignation);
+  String [] getSpecializationByDoctorName(String DoctorName);
   String getDoctorExperienceByDoctorDesignation(String doctorDesignation);
 
 

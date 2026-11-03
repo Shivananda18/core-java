@@ -22,20 +22,20 @@ public class FortisRunner {
 
             System.out.println("enter doctor name");
             sc.nextLine();
-
             doctors.setDoctorName(sc.nextLine());
+
             System.out.println("enter doctor designation");
-
             doctors.setDesignation(sc.nextLine());
+
             System.out.println("enter doctor exp");
-
             doctors.setExperience(sc.nextLine());
+
             System.out.println("enter doctor fees");
-
             doctors.setFees(sc.nextInt());
-            System.out.println("enter the specializations");
 
-            String specializations = sc.next();
+            sc.nextLine();
+            System.out.println("enter the specializations");
+            String specializations = sc.nextLine();
             String[] specailizations = specializations.split(",");
             doctors.setSpecialization(specailizations);
 
@@ -63,12 +63,11 @@ public class FortisRunner {
                 case 1:
                     System.out.println("all doctors details");
                     fortisHospital1.getDoctors();
-
                     break;
 
                 case 2:
                     System.out.println("fetching doctors info  by id");
-                    Doctors doctors = fortisHospital1.getDoctorsByID(1);
+                    Doctors doctors = fortisHospital1.getDoctorsByID(101);
                     System.out.println(doctors);
                     break;
 
@@ -86,7 +85,7 @@ public class FortisRunner {
 
                 case 5:
                     System.out.println("fetching the doctor name by Designation ");
-                    String designation = fortisHospital1.getDesignationBYDoctorName("cardilogist");
+                    String designation = fortisHospital1.getDesignationBYDoctorName("cardiologist");
                     System.out.println(designation);
                     break;
 
@@ -98,10 +97,11 @@ public class FortisRunner {
 
                 case 7:
                     System.out.println("fetching doctor specialization info by designation");
-                    String[] s = fortisHospital1.getSpecializationByDesignation("dc");
-                    System.out.println(s);
-                    break;
-
+                    String[] specialization = fortisHospital1.getSpecializationByDoctorName("shiva");
+                    for(String special:specialization) {
+                        System.out.println(special);
+                    }
+                     break;
                 case 8:
                     System.out.println("fetching doctorDesignation info by experience ");
                     System.out.println(fortisHospital1.getDoctorExperienceByDoctorDesignation("sdv"));
@@ -116,7 +116,7 @@ public class FortisRunner {
 
                 case 10:
                     System.out.println("update doctor experience by Doctor id");
-                    boolean updateExperience = fortisHospital1.updateDoctorExperienceByDoctorId("5 years", 1);
+                    boolean updateExperience = fortisHospital1.updateDoctorExperienceByDoctorId("5 years", 101);
                     System.out.println("updateExperience ; " + updateExperience);
                     System.out.println(fortisHospital1.getDoctorFeesBYExperience("1 years"));
                     break;
@@ -125,7 +125,7 @@ public class FortisRunner {
                     System.out.println("update doctor designation by doctor name");
                     boolean updateDesignation = fortisHospital1.updateDoctorDesignationByDoctorName("Principle", "Dr. Ajay  Agarwal");
                     System.out.println("updateDesignation :" + updateDesignation);
-                    System.out.println(fortisHospital1.getSpecializationByDesignation("cardiology"));
+                    System.out.println(fortisHospital1.getSpecializationByDoctorName("cardiology"));
                     break;
 
                 case 12:

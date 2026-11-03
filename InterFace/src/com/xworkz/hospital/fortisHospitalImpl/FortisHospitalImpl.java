@@ -1,8 +1,7 @@
 package com.xworkz.hospital.fortisHospitalImpl;
 
 import com.xworkz.hospital.Hospital;
-
-import javax.print.Doc;
+import com.xworkz.hospital.hospitalException.*;
 
 public class FortisHospitalImpl implements Hospital {
 
@@ -49,13 +48,12 @@ public class FortisHospitalImpl implements Hospital {
 
     @Override
     public void getDoctors() {
+      try{
         for(Doctors doctors : doctors){
-            doctors = null;
-            try{
-            System.out.println(doctors.hashCode());
-        }catch (NullPointerException e){
-                e.printStackTrace();
-            }
+            System.out.println(doctors);
+        }
+            }catch (NullPointerException e){
+          e.printStackTrace();
         }
         }
 
@@ -63,24 +61,21 @@ public class FortisHospitalImpl implements Hospital {
     public Doctors getDoctorsByID(int id) {
 
         System.out.println("invoking getDoctorsByID ");
-        try {
             Doctors doctors1 = null;
+        try {
             for (Doctors doctor : doctors) {
 
                 if (doctor.getDoctorId() == id) {
                     doctors1 = doctor;
-                    break;
-                } else {
-                    System.out.println("doctor id not matching");
                 }
+                }
+            if(doctors1==null){
+                throw new UpdateDoctorException("update doctor not available");
             }
-
-
-            return doctors1;
-        } catch (NullPointerException e) {
+        } catch (UpdateDoctorException e) {
             e.printStackTrace();
         }
-    return  null;
+       return doctors1;
     }
 
     @Override
@@ -89,15 +84,14 @@ public class FortisHospitalImpl implements Hospital {
 
       String doctorName=null;
       try{
-      for(Doctors doctors: doctors){
-          if(fees==doctors.getFees()){
-               doctorName = doctors.getDoctorName();
-              break;
-          }else{
-              System.out.println("doctor fees not matching");
+      for(Doctors doctors: doctors) {
+          if (fees == doctors.getFees()) {
+              doctorName = doctors.getDoctorName();
+          }
+          if (doctorName == null) {
+              throw new InvalidDoctorNameException("doctor name not found");
           }
       }
-        return doctorName;
     } catch (Exception e) {
          e.printStackTrace();
 
@@ -113,17 +107,14 @@ public class FortisHospitalImpl implements Hospital {
         try{
         for (Doctors doctors : doctors) {
             if (doctorExperience.equals(doctors.getExperience()) ){
-                doctors=null;
                 doctorFess = doctors.getFees();
-
-            } else {
-                System.out.println("doctor experience not matching");
             }
+            }
+        if(doctorFess==0){
+            throw new InvalidDoctorFeesException("invalid Doctor Fees");
         }
-            return doctorFess;
         }catch(NullPointerException e){
           e.printStackTrace();
-
       }
         return doctorFess;
     }
@@ -138,11 +129,11 @@ public class FortisHospitalImpl implements Hospital {
               doctors1=null;
               designation=doctors1.getDesignation();
               break;
-          }else{
-              System.out.println("doctor name not matching");
           }
+          }
+      if(designation==null){
+          throw new InvaliddoctorDesignationException("doctor designation not found");
       }
-      return designation;
     }catch (NullPointerException e){
       e.printStackTrace();
       }
@@ -156,12 +147,11 @@ try{
           if(doctorName.equals(doctors1.getDoctorName())){
               doctors1=null;
               doctors1.getDoctorId();
-              break;
-          }else{
-              System.out.println("doctor name not matching");
           }
+          }
+      if(doctorId==0){
+          throw  new InvalidDoctorIdException(" doctor id not found ");
       }
-      return doctorId;
     }catch (NullPointerException e){
     e.printStackTrace();
 }
@@ -169,23 +159,24 @@ return doctorId;
     }
 
     @Override
-    public String[] getSpecializationByDesignation(String DoctorDesignation) {
-      String[] specialization=null;
-try{
-      for(Doctors doctors1:doctors){
-          if(DoctorDesignation.equals(doctors1.getDesignation())){
-              String[] specialization1=doctors1.getSpecialization();
-              break;
-          }else{
-              System.out.println("doctor designation not matching");
-          }
-      }
-        return specialization;
-    }catch (NullPointerException e){
-    e.printStackTrace();
-}
-return specialization;
-    }
+    public String[] getSpecializationByDoctorName(String DoctorName) {
+        String[] specialization = null;
+        try {
+            for (Doctors doctors1 : doctors) {
+                if (DoctorName.equals(doctors1.getDoctorName())) {
+                     specialization = doctors1.getSpecialization();
+                }
+            }
+            if (specialization == null) {
+                SpecializationNotFoundException specializationNotFoundException = new SpecializationNotFoundException("Specialization not found");
+                throw specializationNotFoundException;
+            }
+            }catch(SpecializationNotFoundException e){
+                e.printStackTrace();
+            }
+            return specialization;
+        }
+
 
     @Override
     public String getDoctorExperienceByDoctorDesignation(String doctorDesignation) {
@@ -195,12 +186,12 @@ return specialization;
           if(doctorDesignation.equals(doctors1.getDesignation())){
               doctors1=null;
              experience= doctors1.getExperience();
-          }else{
-              System.out.println("designation not matching");
           }
+          }
+      if(experience==null) {
+          throw new DoctorExperienceNotFoundException("experience not found");
       }
-      return experience;
-    }catch (NullPointerException e){
+    }catch (DoctorExperienceNotFoundException e){
       e.printStackTrace();
       }
       return experience;
@@ -210,20 +201,21 @@ return specialization;
     public boolean updateDoctorFessByDoctorName(int newFees, String doctorName) {
        boolean isDoctorFessUpdate=false;
 
-       try{
-       for(Doctors doctors1:doctors){
-           if(doctorName.equals(doctors1.getDoctorName())){
-               doctors1.setFees(newFees);
-               isDoctorFessUpdate=true;
-               System.out.println("update doctor fees");
-           }else{
-               System.out.println("doctor fees not updated");
+       try {
+           for (Doctors doctors1 : doctors) {
+               if (doctorName.equals(doctors1.getDoctorName())) {
+                   doctors1.setFees(newFees);
+                   isDoctorFessUpdate = true;
+                   System.out.println("update doctor fees");
+               }
            }
-       }
-        return isDoctorFessUpdate;
-    }catch (NullPointerException e){
-       e.printStackTrace();
-       }
+           if (isDoctorFessUpdate == false) {
+               UpdateDoctorFeesNotFoundException updateDoctorFeesNotFound = new UpdateDoctorFeesNotFoundException("Updated fees not found");
+               throw updateDoctorFeesNotFound;
+           }
+           }catch(UpdateDoctorFeesNotFoundException e){
+               e.printStackTrace();
+           }
        return isDoctorFessUpdate;
     }
 
@@ -231,19 +223,20 @@ return specialization;
     public boolean updateDoctorExperienceByDoctorId(String newExperience, int doctorId) {
         boolean updateExperience=false;
         for(Doctors doctors1:doctors) {
-
             try {
                 if (doctorId == doctors1.getDoctorId()) {
                     doctors1.setExperience(newExperience);
                     updateExperience = true;
                     System.out.println("update doctor Experience");
                 }
-            }catch(NullPointerException e){
+                if(updateExperience==false) {
+                    UpdateDoctorExperienceNotFoundException updateDoctorExperienceNotFoundException = new UpdateDoctorExperienceNotFoundException("updated Experience not found");
+                    throw updateDoctorExperienceNotFoundException;
+                }
+            }catch(UpdateDoctorFeesNotFoundException e){
                 e.printStackTrace();
             }
-
         }
-
       return updateExperience;
     }
 
@@ -258,8 +251,11 @@ return specialization;
                   updateDesignation=true;
               }
           }
-        return updateDesignation;
-    }catch (NullPointerException e){
+      if(updateDesignation==false) {
+          UpdateDoctorDesignationNotFoundException updateDoctorDesignationNotFoundException = new UpdateDoctorDesignationNotFoundException("update Designation not found");
+          throw updateDoctorDesignationNotFoundException;
+      }
+    }catch (UpdateDoctorDesignationNotFoundException e){
       e.printStackTrace();
       }
       return updateDesignation;
@@ -274,9 +270,11 @@ return specialization;
               doctors1.setDoctorName(newName);
               updateName=true;
           }
-      }
-        return updateName;
-    }catch (NullPointerException e){
+      }if(updateName==false) {
+              UpdateDoctorNameException updateDoctorNameException = new UpdateDoctorNameException("update Doctor name not found");
+              throw updateDoctorNameException;
+          }
+    }catch (UpdateDoctorNameException e){
       e.printStackTrace();
       }
       return updateName;
@@ -291,12 +289,12 @@ return specialization;
               doctors1.setSpecialization(newDesignation);
               updateSpecialization=true;
               System.out.println("specialization is updated");
-          }else{
-              System.out.println("specialization is not updated");
           }
       }
-      return updateSpecialization;
-    }catch (NullPointerException e){
+      if(updateSpecialization==false){
+          throw new UpdateDoctorSpecializationNotFoundException("update Specialization not found");
+      }
+    }catch (UpdateDoctorSpecializationNotFoundException e){
       e.printStackTrace();
       }
       return updateSpecialization;
