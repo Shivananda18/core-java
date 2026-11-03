@@ -5,6 +5,8 @@ import com.xworkz.aadhaarCard.aadhaarCardImpl.AadhaarCardImpl;
 import com.xworkz.aadhaarCard.aadhaarCardImpl.AadhaarUser;
 import com.xworkz.hospital.fortisHospitalImpl.Doctors;
 
+import java.io.FileReader;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AadhaarRunner {
@@ -28,7 +30,11 @@ public class AadhaarRunner {
             aadhaarUser.setDateOfBirth(sc.next());
 
             System.out.println("enter the Mobile Number");
-            aadhaarUser.setMobileNumber(sc.nextLong());
+            try {
+                aadhaarUser.setMobileNumber(sc.nextLong());
+            }catch (InputMismatchException e){
+                e.printStackTrace();
+            }
 
             System.out.println("enter the email");
             aadhaarUser.setEmail(sc.next());
@@ -44,17 +50,21 @@ public class AadhaarRunner {
 String yesOrNo=null;
         do {
 
-
-            System.out.println("enter option");
-            int option = sc.nextInt();
-
             System.out.println("press 1 get all Aadhaar details");
             System.out.println("press 2 getUserIdByUserName");
             System.out.println("press 3 getUserAadhaarNumberByUserMobileNumber");
             System.out.println("press 4 getUserEmailBYUserAddress");
             System.out.println("press 5 getUserGenderByUserName");
             System.out.println("press 6 getUserEmailByUserMobileNumber");
-            System.out.println("press 7 getUserEmailByUserMobileNumber");
+            System.out.println("press 7 getUserAddressByUserAadhaarNumber");
+            System.out.println("press 8 updateIdByName");
+            System.out.println("press 9 updateAadhaarNumberByMobileNumber");
+            System.out.println("press 10 updateGenderByname");
+            System.out.println("press 11 updateEmailByAddress");
+
+            System.out.println("enter option");
+            int option = sc.nextInt();
+
 
             switch (option) {
                 case 1:
@@ -121,7 +131,10 @@ String yesOrNo=null;
             yesOrNo=sc.next();
         } while (yesOrNo.equalsIgnoreCase("y"));
 
-        
-     //  Class<Doctors>doctorClass=  (Class<Doctors>)Class.forName("com.xworkz.hospital.fortisHospitalImpl.Doctors");
+        try{
+       Class<Doctors> doctorClass=  (Class<Doctors>)Class.forName("com.xworkz.hospital.fortisHospitalImpl.Doctors");
+    }catch (ClassNotFoundException e){
+        e.printStackTrace();
+        }
     }
 }
