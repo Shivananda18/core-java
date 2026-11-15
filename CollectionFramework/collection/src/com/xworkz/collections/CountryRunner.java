@@ -1,14 +1,12 @@
-package com.xworkz.collections.cities;
+package com.xworkz.collections;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class CountryRunner {
 
     public static void main(String[] args) {
 
-        Collection countries=new ArrayList();
+        Set countries=new TreeSet();
         countries.add("India");
         countries.add("United States");
         countries.add("United Kingdom");
@@ -60,10 +58,8 @@ public class CountryRunner {
         countries.add("Kenya");
         countries.add("Ethiopia");
 
+
        System.out.println(countries);
         System.out.println(countries.remove("Ethiopia"));
-
-
-
     }
 }

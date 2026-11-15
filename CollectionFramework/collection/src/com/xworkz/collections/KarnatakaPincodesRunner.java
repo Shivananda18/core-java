@@ -1,4 +1,4 @@
-package com.xworkz.collections.cities;
+package com.xworkz.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
