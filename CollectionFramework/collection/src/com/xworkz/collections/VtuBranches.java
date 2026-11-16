@@ -2,12 +2,13 @@ package com.xworkz.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class VtuBranches {
 
     public static void main(String[] args) {
 
-        Collection<String> engineeringBranches=new ArrayList();
+        List<String> engineeringBranches=new ArrayList();
         engineeringBranches.add("computer science and design");
         engineeringBranches.add("computer science and engineering");
         engineeringBranches.add("Information Science");

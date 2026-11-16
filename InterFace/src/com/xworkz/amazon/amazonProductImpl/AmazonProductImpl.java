@@ -1,6 +1,7 @@
 package com.xworkz.amazon.amazonProductImpl;
 
 import com.xworkz.amazon.AmazonProduct;
+import com.xworkz.amazon.amazonException.*;
 import com.xworkz.amazon.amazonProductImpl.product.Product;
 
 import java.util.InputMismatchException;
@@ -57,7 +58,7 @@ public class AmazonProductImpl implements AmazonProduct {
 
     public void getAllProducts(){
         try{
-        for (Product product:products){
+        for (Product product:products) {
             System.out.println(product);
         }
         }catch (NullPointerException e){
@@ -67,14 +68,16 @@ public class AmazonProductImpl implements AmazonProduct {
     @Override
     public int getProductIdByBrandName(String brandName) {
         int productId=0;
-
-        for(Product product:products){
+        for(Product product:products) {
             try {
                 if (brandName.equals(product.getBrandName())) {
                     product.getProductId();
                 }
-            }catch (InputMismatchException e){
-                System.out.println("input is miss match");
+                if (productId == 0) {
+                    throw new ProductIdNotFoundException("product id not found");
+                }
+            } catch (InputMismatchException e) {
+                e.printStackTrace();
             }
         }
         return productId;
@@ -83,10 +86,17 @@ public class AmazonProductImpl implements AmazonProduct {
     @Override
     public String getProductModelByProductScreenSize(String screenSize) {
         String getProductModel=null;
-        for(Product product:products){
-            if(screenSize.equals(product.getScreenSize())){
-                getProductModel=product.getModel();
+        try {
+            for (Product product : products) {
+                if (screenSize.equals(product.getScreenSize())) {
+                    getProductModel = product.getModel();
+                }
             }
+                if (getProductModel == null) {
+                    throw new ProductModelNotFoundException("");
+                }
+        }catch (ProductModelNotFoundException e){
+            e.printStackTrace();
         }
         return getProductModel;
     }
@@ -98,6 +108,8 @@ public class AmazonProductImpl implements AmazonProduct {
             if(specialFeature.equals(product.getSpecialFeature())){
                 getHardDiskInGB=product.getHardDiskInGb();
             }
+        }if(getHardDiskInGB==0){
+            throw new HardDiskNotFoundException("HardDiskNotFound not exception");
         }
         return getHardDiskInGB;
     }
@@ -109,6 +121,8 @@ public class AmazonProductImpl implements AmazonProduct {
             if(productRam.equals(product.getRam())){
                 getProductColour=product.getColour();
             }
+        }if(getProductColour==null){
+            throw new ProductColourNotFoundException("product colour not found");
         }
         return getProductColour;
     }
@@ -120,6 +134,8 @@ public class AmazonProductImpl implements AmazonProduct {
             if(productColour.equals(product.getColour())){
                 getProductFeature=product.getSpecialFeature();
             }
+        }if(getProductFeature==null){
+            throw new ProductFeatureNotFoundException("Product feature not found");
         }
         return  getProductFeature;
     }
@@ -133,6 +149,8 @@ public class AmazonProductImpl implements AmazonProduct {
                 updateId=true;
                 System.out.println("id is updated");
             }
+        }if(updateId==false){
+          throw new UpdateModelNotFoundException("id not found");
         }
         return updateId;
     }
@@ -146,6 +164,8 @@ public class AmazonProductImpl implements AmazonProduct {
                 updateModel=true;
                 System.out.println("model is updated");
             }
+        }if(updateModel==false){
+            throw new UpdateModelNotFoundException("update model not found");
         }
         return updateModel;
     }
@@ -157,8 +177,9 @@ public class AmazonProductImpl implements AmazonProduct {
             if(colour.equals(product.getColour())){
                 product.setSpecialFeature(newFeature);
                 updateFeature=true;
-                System.out.println("product feature is updated");
             }
+        }if(updateFeature==false){
+            throw new UodateFeatureNotFoundException("update feature not found");
         }
         return updateFeature;
     }

@@ -1,6 +1,5 @@
 package com.xworkz.collections;
 
-import java.text.CollationKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

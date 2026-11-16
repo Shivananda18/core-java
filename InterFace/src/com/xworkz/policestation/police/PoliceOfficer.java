@@ -75,4 +75,5 @@ public class PoliceOfficer {
                 ", isOnDuty=" + isOnDuty +"policeOfficerAge= "+policeOfficerAge+
                 '}';
     }
+
 }

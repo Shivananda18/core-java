@@ -2,6 +2,9 @@ package com.xworkz.policestation;
 
 import com.xworkz.policestation.police.PoliceOfficer;
 
+import java.io.File;
+import java.io.FileReader;
+
 public class PoliceStationImpl implements PoliceStation {
 
     PoliceOfficer[] policeOfficer;
@@ -52,10 +55,6 @@ public class PoliceStationImpl implements PoliceStation {
     public void getPoliceOfficer() {
         for (PoliceOfficer policeOfficer1 : policeOfficer) {
             System.out.println(policeOfficer1);
-            if (policeOfficer1 != null) {
-            } else {
-                System.out.println("policer not added");
-            }
         }
     }
 
@@ -178,6 +177,7 @@ public class PoliceStationImpl implements PoliceStation {
         }
         return updateOnDuty;
     }
+
 }
 
 

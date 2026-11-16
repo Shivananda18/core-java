@@ -131,7 +131,6 @@ String yesOrNo=null;
             System.out.println("do you want continue ");
            yesOrNo= scanner.next();
         }while(yesOrNo.equalsIgnoreCase("y"));
-
         }
     }
 

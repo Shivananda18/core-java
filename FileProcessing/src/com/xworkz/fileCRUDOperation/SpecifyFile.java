@@ -1,9 +1,9 @@
 package com.xworkz.fileCRUDOperation;
 
-import java.io.*;
 
+import java.io.File;
 
-    public class SpecifyFile {
+public class SpecifyFile {
         public static void main(String[] args){
             try{
             System.out.println("main started");

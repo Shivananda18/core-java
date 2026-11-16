@@ -1,6 +1,7 @@
 package com.xworkz.cart.orderimpl;
 
 import com.xworkz.cart.Cart;
+import com.xworkz.cart.cartException.*;
 import com.xworkz.cartException.InvalidOrderException;
 
 public class OrderImpl implements Cart {
@@ -42,7 +43,7 @@ public class OrderImpl implements Cart {
         if(order.getDeliveryFees()>0){
             isDeliveryFess=true;
         }
-        if(order.getWarranty()!=null && order.getWarranty().isEmpty()){
+        if(order.getWarranty()!=null && !order.getWarranty().isEmpty()){
             isWarranty=true;
         }
         if(isOderId && isOrderName && orderPrice && isDiscount && isPotectPromiseFees && isCouponAvailable && isDeliveryFess && isWarranty){
@@ -66,26 +67,35 @@ throw invalidOrderException;
     @Override
     public String getOrderNameById(int orderId) {
        String  orderName=null;
-
-       for(Order order1:order){
-           if(order1!=null && orderId==order1.getOrderId()){
-               orderName=order1.getOrderName();
-           }else{
-
-           }
-       }
+try {
+    for (Order order1 : order) {
+        if (order1 != null && orderId == order1.getOrderId()) {
+            orderName = order1.getOrderName();
+        }
+    }
+    if (orderName == null) {
+        throw new OrderNameNotFoundException("order Name not found");
+    }
+}catch (OrderNameNotFoundException e){
+    e.printStackTrace();
+}
         return orderName ;
     }
     @Override
     public int getOrderIdByOrderName(String orderName) {
-        int orderId=0;
-        for(Order order1:order){
-            if(orderName.equals(order1.getOrderName())){
-                orderId=order1.getOrderId();
+        int orderId = 0;
+        try{
+        for (Order order1 : order) {
+            if (orderName.equals(order1.getOrderName())) {
+                orderId = order1.getOrderId();
                 break;
-            }else{
-                System.out.println("orderName not match");
             }
+        }
+        if (orderId == 0) {
+            throw new OrderIdNotFoundException("order id not found");
+        }
+    }catch (OrderIdNotFoundException e){
+            e.printStackTrace();
         }
         return orderId;
     }
@@ -93,12 +103,16 @@ throw invalidOrderException;
     @Override
     public double getOrderDiscountByOrderPrice(double orderPrice) {
         double orderDiscount=0;
+        try{
         for(Order order1:order){
             if(orderPrice==order1.getOrderPrice()){
                 orderDiscount=order1.getDiscount();
-            }else{
-                System.out.println("order price not match");
             }
+        }if(orderDiscount==0){
+            throw new OrderDiscountNotFoundException("order discount not found");
+        }
+        }catch (OrderDiscountNotFoundException e){
+            e.printStackTrace();
         }
         return orderDiscount;
     }
@@ -106,23 +120,31 @@ throw invalidOrderException;
     @Override
     public double getPotectPromiseFeesByOrderWarranty(String orderWarranty) {
         double protectPromiseFess=0;
+        try{
         for(Order order1:order){
             if(orderWarranty.equals(order1.getWarranty())){
                 protectPromiseFess=order1.getPotectPromiseFees();
-            }else{
-                System.out.println("warranty not match");
             }
+            }if(protectPromiseFess==0){
+            throw new ProtectPromiseFeesNotFoundException("protect promise fees not found");
+            }
+        }catch (ProtectPromiseFeesNotFoundException e){
+            e.printStackTrace();
         }
         return protectPromiseFess;
     }
     public double getOrderPriceByOrderCoupon(double orderCoupon){
         double orderPrice=0.0;
+        try{
         for(Order order1:order){
             if(orderCoupon==order1.getCouponsForYou()){
                 orderPrice=order1.getOrderPrice();
-            }else {
-                System.out.println("orderCoupon not match");
             }
+            }if(orderPrice==0){
+            throw new ProtectPromiseFeesNotFoundException("price not found");
+            }
+        }catch (ProtectPromiseFeesNotFoundException e){
+            e.printStackTrace();
         }
         return orderPrice;
     }

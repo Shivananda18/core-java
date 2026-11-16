@@ -258,7 +258,5 @@ public class BankRunner {
         kotakMahendraBank.ConsentRecordKeeper();
         kotakMahendraBank.AuditTrailArchiver();
 
-
-
     }
 }

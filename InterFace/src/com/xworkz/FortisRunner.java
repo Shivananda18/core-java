@@ -28,6 +28,7 @@ public class FortisRunner {
             doctors.setDesignation(sc.nextLine());
 
             System.out.println("enter doctor exp");
+            sc.nextLine();
             doctors.setExperience(sc.nextLine());
 
             System.out.println("enter doctor fees");

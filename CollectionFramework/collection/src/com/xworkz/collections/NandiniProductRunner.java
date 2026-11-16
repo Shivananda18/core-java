@@ -1,13 +1,13 @@
 package com.xworkz.collections;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class NandiniProductRunner {
 
     public static void main(String[] args) {
 
-        Collection<String> nandiniProduct=new ArrayList();
+        List<String> nandiniProduct=new ArrayList();
         nandiniProduct.add("toned milk");
         nandiniProduct.add("Homogenized");
         nandiniProduct.add("Full cream milk");
@@ -33,11 +33,6 @@ public class NandiniProductRunner {
         nandiniProduct.add("Dharwad Peda");
         nandiniProduct.add("Milk Peda");
 
-       // System.out.println(nandiniProduct);
-
-        for(String nandini:nandiniProduct){
-            System.out.println(nandini);
-
+        System.out.println(nandiniProduct);
         }
     }
-}

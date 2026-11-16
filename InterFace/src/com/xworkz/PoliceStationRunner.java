@@ -21,6 +21,7 @@ public class PoliceStationRunner {
             System.out.println("enter the police officer id");
             policeOfficer.setPoliceId(scanner.nextInt());
 
+
             System.out.println("enter police officer name");
             policeOfficer.setOfficerName(scanner.next());
 
@@ -39,9 +40,11 @@ public class PoliceStationRunner {
             System.out.println("Enter police officer Age ");
             policeOfficer.setPoliceOfficerAge(scanner.nextInt());
 
+           // policeStationImpl.addPoliceOfficer(policeOfficer);
+
            if(policeStationImpl.addPoliceOfficer(policeOfficer)>0){
             policeStationImpl.addPoliceOfficer(policeOfficer);
-            }else{
+           }else{
                 System.out.println("police officers not adding");
             }
         }

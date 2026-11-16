@@ -2,13 +2,13 @@ package com.xworkz.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 public class BangaloreCitiesRunner {
 
     public static void main(String[] args) {
 
-        Collection  bangaloreAreas=new ArrayList();
+        List bangaloreAreas=new ArrayList();
 
         bangaloreAreas.add("Rajaji NAgar");
         bangaloreAreas.add("malleshwaram");
